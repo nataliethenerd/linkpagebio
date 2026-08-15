@@ -53,7 +53,47 @@
           var(--black);
         color: var(--white);
         font-family: "Poppins", sans-serif;
-        min-height: 100vh;
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+      .scroll-container {
+        flex: 1 1 auto;
+        overflow-y: scroll;
+        scroll-snap-type: y mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+      }
+      .snap-section {
+        height: 100%;
+        width: 100%;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        overflow-y: auto;
+        box-sizing: border-box;
+      }
+      .scroll-hint {
+        position: absolute;
+        bottom: 22px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: var(--yellow);
+        font-size: 20px;
+        animation: bounce 1.6s infinite;
+      }
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: translate(-50%, 0);
+        }
+        50% {
+          transform: translate(-50%, 8px);
+        }
       }
       .topnav {
         background: var(--black);
@@ -69,15 +109,12 @@
         font-weight: 600;
         font-size: 16px;
       }
-
       .hero {
         position: relative;
         padding: 56px 20px 40px;
         text-align: center;
-
         overflow: hidden;
       }
-
       h1 {
         font-family: "The Bold Font Pro", sans-serif;
         font-weight: 700;
@@ -93,7 +130,6 @@
         margin: 0 auto;
         font-weight: 400;
       }
-
       .content {
         max-width: 460px;
         margin: 0 auto;
@@ -111,7 +147,6 @@
       .section-label:first-child {
         margin-top: 0;
       }
-
       .links {
         display: flex;
         flex-direction: column;
@@ -162,7 +197,6 @@
         color: #999;
         font-size: 13px;
       }
-
       .link-btn.outline {
         background: black;
         color: var(--white);
@@ -181,85 +215,232 @@
       .link-btn.outline .arrow {
         color: #777;
       }
+      .contact-form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .contact-form label {
+        font-size: 13px;
+        color: #c9c9c9;
+        margin-bottom: 6px;
+        display: block;
+      }
+      .contact-form input,
+      .contact-form textarea {
+        width: 100%;
+        background: var(--charcoal);
+        border: 2px solid #2c2c2c;
+        border-radius: 14px;
+        color: var(--white);
+        font-family: "Poppins", sans-serif;
+        font-size: 15px;
+        padding: 13px 16px;
+        outline: none;
+        transition: border-color 0.15s ease;
+      }
+      .contact-form input:focus,
+      .contact-form textarea:focus {
+        border-color: var(--yellow);
+      }
+      .contact-form textarea {
+        resize: vertical;
+        min-height: 100px;
+      }
+      .contact-form button[type="submit"] {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 100%;
+        background: var(--yellow);
+        color: var(--black);
+        border: none;
+        border-radius: 999px;
+        padding: 15px 22px;
+        font-weight: 600;
+        font-size: 15px;
+        font-family: "Poppins", sans-serif;
+        cursor: pointer;
+        transition: transform 0.15s ease, opacity 0.15s ease;
+      }
+      .contact-form button[type="submit"]:hover {
+        transform: translateY(-2px) scale(1.01);
+      }
+      .contact-form button[type="submit"]:disabled {
+        opacity: 0.6;
+        cursor: default;
+        transform: none;
+      }
+      .contact-success {
+        display: none;
+        text-align: center;
+        color: var(--yellow);
+        font-size: 16px;
+      }
+      .contact-success i {
+        font-size: 30px;
+        display: block;
+        margin-bottom: 10px;
+      }
     </style>
   </head>
   <body>
-    <div class="hero">
-      <h1>Natalie the Nerd</h1>
-      <p class="tagline">
-        Based in Melbourne Australia, I'm a self taught hobby maker just trying
-        to make and learn more.
-      </p>
+    <div class="scroll-container">
+
+      <section class="snap-section hero">
+        <h1>Natalie the Nerd</h1>
+        <p class="tagline">
+          Based in Melbourne Australia, I'm a self taught hobby maker just trying
+          to make and learn more.
+        </p>
+        <div class="scroll-hint"><i class="fa-solid fa-chevron-down"></i></div>
+      </section>
+
+      <section class="snap-section">
+        <div class="content">
+          <div class="links">
+            <a class="link-btn" href="https://nataliethenerd.com/collections/all">
+              <i class="fa-solid fa-bag-shopping"></i>
+              <span class="label-wrap"
+                >Shop the store<span class="sub"></span
+              ></span>
+              <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+            <a class="link-btn" href="https://wiki.nataliethenerd.com/">
+              <i class="fa-solid fa-screwdriver-wrench"></i>
+              <span class="label-wrap">Wiki (board scans and more)</span>
+              <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+            <a class="link-btn" href="https://blog.nataliethenerd.com/">
+              <i class="fa-solid fa-pen"></i>
+              <span class="label-wrap">Blog</span>
+              <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="snap-section">
+        <div class="content">
+          <div class="section-label">Open Source + Shared Projects</div>
+          <div class="links">
+            <a class="link-btn outline" href="https://github.com/nataliethenerd">
+              <i class="fa-brands fa-github"></i>
+              <span class="label-wrap">GitHub</span>
+              <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+            <a class="link-btn outline" href="https://www.pcbway.com/project/member/shareproject/?bmbno=8E052D1F-B6E0-47">
+              <i class="fa-solid fa-screwdriver-wrench"></i>
+              <span class="label-wrap">PCB Way</span>
+              <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="snap-section">
+        <div class="content">
+          <div class="section-label">Social Media</div>
+          <div class="links">
+            <a class="link-btn outline" href="https://www.instagram.com/natalie.thenerd/">
+              <i class="fa-brands fa-instagram"></i>
+              <span class="label-wrap">Instagram</span>
+              <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+            <a class="link-btn outline" href="https://www.youtube.com/channel/UCw-mRS7dBMCw8RJ6GuIFUqQ">
+              <i class="fa-brands fa-youtube"></i>
+              <span class="label-wrap">YouTube</span>
+              <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+            <a class="link-btn outline" href="https://www.tiktok.com/@natalie.thenerd">
+              <i class="fa-brands fa-tiktok"></i>
+              <span class="label-wrap">TikTok</span>
+              <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+            <a class="link-btn outline" href="https://x.com/natalie_thenerd">
+              <i class="fa-brands fa-x-twitter"></i>
+              <span class="label-wrap">X / Twitter</span>
+              <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+            <a class="link-btn outline" href="https://bsky.app/profile/nataliethenerd.com">
+              <i class="fa-brands fa-bluesky"></i>
+              <span class="label-wrap">Bluesky</span>
+              <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+            <a class="link-btn outline" href="#contact-page">
+              <i class="fa-solid fa-envelope"></i>
+              <span class="label-wrap">Contact</span>
+              <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="snap-section" id="contact-page">
+        <div class="content">
+          <div class="section-label">Get in touch</div>
+          <form class="contact-form" id="contact-form">
+            <input type="hidden" name="access_key" value="5915c6bd-bf31-408d-8ee7-248f856c5cab" />
+            <input type="hidden" name="subject" value="New message from nataliethenerd.com links page" />
+            <input type="checkbox" name="botcheck" style="display: none" tabindex="-1" autocomplete="off" />
+            <div>
+              <label for="cf-name">Name</label>
+              <input type="text" id="cf-name" name="name" required />
+            </div>
+            <div>
+              <label for="cf-email">Email</label>
+              <input type="email" id="cf-email" name="email" required />
+            </div>
+            <div>
+              <label for="cf-message">Message</label>
+              <textarea id="cf-message" name="message" required></textarea>
+            </div>
+            <button type="submit">
+              <span class="btn-label">Send message</span>
+              <i class="fa-solid fa-paper-plane"></i>
+            </button>
+          </form>
+          <div class="contact-success" id="contact-success">
+            <i class="fa-solid fa-circle-check"></i>
+            Thanks! Your message is on its way.
+          </div>
+        </div>
+      </section>
+
     </div>
 
-    <div class="content">
-      <div class="links">
-        <a class="link-btn" href="https://nataliethenerd.com/collections/all">
-          <i class="fa-solid fa-bag-shopping"></i>
-          <span class="label-wrap"
-            >Shop the store<span class="sub"></span
-          ></span>
-          <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
-        </a>
-        <a class="link-btn" href="https://wiki.nataliethenerd.com/">
-          <i class="fa-solid fa-screwdriver-wrench"></i>
-          <span class="label-wrap">Wiki (board scans and more)</span>
-          <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
-        </a>
-        <a class="link-btn" href="https://blog.nataliethenerd.com/">
-          <i class="fa-solid fa-pen"></i>
-          <span class="label-wrap">Blog</span>
-          <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
-        </a>
-      </div>
-
-      <div class="section-label">Open Source + Shared Projects</div>
-      <div class="links">
-        <a class="link-btn outline" href="https://github.com/nataliethenerd">
-          <i class="fa-brands fa-github"></i>
-          <span class="label-wrap">GitHub</span>
-          <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
-        </a>
-        <a class="link-btn outline" href="https://www.pcbway.com/project/member/shareproject/?bmbno=8E052D1F-B6E0-47">
-          <i class="fa-solid fa-screwdriver-wrench"></i>
-          <span class="label-wrap">PCB Way</span>
-          <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
-        </a>
-      </div>
-
-      <div class="section-label">Social Media</div>
-      <div class="links">
-        <a class="link-btn outline" href="https://www.instagram.com/natalie.thenerd/">
-          <i class="fa-brands fa-instagram"></i>
-          <span class="label-wrap">Instagram</span>
-          <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
-        </a>
-        <a class="link-btn outline" href="https://www.youtube.com/channel/UCw-mRS7dBMCw8RJ6GuIFUqQ">
-          <i class="fa-brands fa-youtube"></i>
-          <span class="label-wrap">YouTube</span>
-          <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
-        </a>
-        <a class="link-btn outline" href="https://www.tiktok.com/@natalie.thenerd">
-          <i class="fa-brands fa-tiktok"></i>
-          <span class="label-wrap">TikTok</span>
-          <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
-        </a>
-        <a class="link-btn outline" href="https://x.com/natalie_thenerd">
-          <i class="fa-brands fa-x-twitter"></i>
-          <span class="label-wrap">X / Twitter</span>
-          <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
-        </a>
-        <a class="link-btn outline" href="https://bsky.app/profile/nataliethenerd.com">
-          <i class="fa-brands fa-bluesky"></i>
-          <span class="label-wrap">Bluesky</span>
-          <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
-        </a>
-        <a class="link-btn outline" href="#">
-          <i class="fa-solid fa-envelope"></i>
-          <span class="label-wrap">Contact</span>
-          <span class="arrow"><i class="fa-solid fa-arrow-right"></i></span>
-        </a>
-      </div>
-    </div>
+    <script>
+      const contactForm = document.getElementById('contact-form');
+      const contactSuccess = document.getElementById('contact-success');
+      contactForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const btn = contactForm.querySelector('button[type="submit"]');
+        const label = btn.querySelector('.btn-label');
+        btn.disabled = true;
+        label.textContent = 'Sending...';
+        try {
+          const res = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { Accept: 'application/json' },
+            body: new FormData(contactForm),
+          });
+          const result = await res.json();
+          if (result.success) {
+            contactForm.style.display = 'none';
+            contactSuccess.style.display = 'block';
+          } else {
+            btn.disabled = false;
+            label.textContent = 'Send message';
+            alert('Something went wrong — please try again.');
+          }
+        } catch (err) {
+          btn.disabled = false;
+          label.textContent = 'Send message';
+          alert('Network error — please try again.');
+        }
+      });
+    </script>
   </body>
 </html>
